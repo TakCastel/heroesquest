@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import Attributes from './character/Attributes';
-import './App.css';
+import CharacterContainer from './containers/Character';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Attributes/>
+      <div>
+        <CharacterContainer/>
       </div>
     );
   }

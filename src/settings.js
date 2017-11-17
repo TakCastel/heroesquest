@@ -1,0 +1,2 @@
+export const INITIAL_CHARACTERISTIC_POINTS = 11
+export const INITIAL_SKILL_POINTS = 3
