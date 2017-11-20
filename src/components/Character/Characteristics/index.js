@@ -8,7 +8,7 @@ class Characteristics extends Component {
   // Handle the characteristics change from table inputs
   handleChange(type, characteristic) {
     let value = type === 'add' ? + 1 : - 1;
-    this.props.characteristicChange(characteristic, value)
+    this.props.changeCharacteristic(characteristic, value)
   }
 
   // Provide button minor or minus applied to characteristic
@@ -20,7 +20,7 @@ class Characteristics extends Component {
 
     return (
       <tr>
-        <td className="object">{characteristic}:</td>
+        <td className="object">{characteristic}</td>
         <td>{this.props.characteristics[characteristic]}</td>
         <td>
           <button type='button' disabled={disabledMinor} onClick={() => {this.handleChange('add', characteristic)}}><FontAwesome name='plus' /></button>
@@ -34,6 +34,13 @@ class Characteristics extends Component {
     return (
       <div>
         <table>
+          <thead>
+            <tr>
+              <th>Characteristic</th>
+              <th>Value</th>
+              <th>Modification</th>
+            </tr>
+          </thead>
           <tbody>
             {this.renderCharacteristic('strenght')}
             {this.renderCharacteristic('health')}

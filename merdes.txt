@@ -1,0 +1,35 @@
+CHARACTER CREATION COMPONENTS
+<h2>Characteristics</h2>
+<Points {...this.props.character} />
+<Characteristics
+  {...this.props.character} 
+  changeCharacteristic={this.props.changeCharacteristic} />
+
+<h2>Attributes</h2>
+<Attributes 
+  {...this.props.character} />
+
+<h2>Skills</h2>        
+<Skills 
+  {...this.props.character} 
+  changeSkill={this.props.changeSkill} />
+
+CHARACTER PICTURE PSD INDICATOR
+size 64x64
+shadow 1/3
+shadow inclination 45°
+opacity 75%
+
+DISPLAY CHARACTER
+  <img src={require('../../../images/male-human.png')} alt="male-human" />
+  <img src={require('../../../images/female-human.png')} alt="female-human" />
+  <img src={require('../../../images/male-sylvan.png')} alt="male-sylvan" />                
+  <img src={require('../../../images/female-sylvan.png')} alt="female-sylvan" />        
+  <img src={require('../../../images/male-greenskin.png')} alt="male-greenskin" />   
+
+INTRO TEXT
+You wake up in the middle of the night, wet and sweaty. 
+You look outside your tent and see a strange human shape in the distance.
+The shadow is staring at you and the glance is giving you goose bumps.
+When you think you can recognize the form it disapears in the morning myst.
+The sun is now rising at the horizon and you feels terribly tired.

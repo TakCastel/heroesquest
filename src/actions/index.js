@@ -1,19 +1,31 @@
-export const CHARACTERISTIC_CHANGE = 'CHARACTERISTIC_CHANGE';
-export const SKILL_CHANGE = 'SKILL_CHANGE';
-export const SKILL_CHECK = 'SKILL_CHECK';
+export const CHANGE_NAME = 'CHANGE_NAME'
+export const CHANGE_CHARACTERISTIC = 'CHANGE_CHARACTERISTIC'
+export const CHANGE_SKILL = 'CHANGE_SKILL'
+export const CHANGE_RACE = 'CHANGE_RACE'
+export const CHECK_SKILL = 'CHECK_SKILL'
 
-export const characteristicChange = (characteristic, value) => ({
-  type: CHARACTERISTIC_CHANGE,
+export const changeName = (name) => ({
+  type: CHANGE_NAME,
+  name: name
+})
+
+export const changeCharacteristic = (characteristic, value) => ({
+  type: CHANGE_CHARACTERISTIC,
   characteristic: characteristic,
   value: value
 })
 
-export const skillChange = (skill) => ({
-  type: SKILL_CHANGE,
+export const changeSkill = (skill) => ({
+  type: CHANGE_SKILL,
   skill: skill
 })
 
-export const skillCheck = (check) => ({
-  type: SKILL_CHECK,
-  check: check
+export const changeRace = (race) => ({
+  type: CHANGE_RACE,
+  race: race
+})
+
+export const checkSkill = (skill) => ({
+  type: CHECK_SKILL,
+  skill: skill,
 })

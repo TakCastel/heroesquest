@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import CharacterContainer from './containers/Character';
+import Map from './containers/Map';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <CharacterContainer/>
+        <Map />
       </div>
     );
   }
 }
 
-export default App;
+export default App

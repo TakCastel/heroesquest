@@ -1,6 +1,15 @@
-import { CHARACTERISTIC_CHANGE, SKILL_CHANGE, SKILL_CHECK } from '../actions'
+import { 
+  CHANGE_NAME,
+  CHANGE_CHARACTERISTIC, 
+  CHANGE_SKILL, 
+  CHANGE_RACE,
+  CHECK_SKILL,
+} from '../actions'
 
 const defaultState = {
+
+  name: '',
+  race: 'default',
 
   // Characteristics
   characteristics: {
@@ -44,7 +53,14 @@ const defaultState = {
 const character = (state = defaultState, action) => {
   switch (action.type) {
 
-    case CHARACTERISTIC_CHANGE:
+    case CHANGE_NAME:
+
+      return {
+        ...state,
+        name: action.name
+      }
+
+    case CHANGE_CHARACTERISTIC:
 
       let valueCharacteristic = state.characteristics[action.characteristic] + action.value
       let totalCharacteristic = state.totalSpentInCharacteristics + action.value
@@ -58,37 +74,35 @@ const character = (state = defaultState, action) => {
         }
       }
 
-    case SKILL_CHANGE:
+    case CHANGE_SKILL:
 
       let valueSkill = state.skills[action.skill] ? false : true
-      let countSkill = 0      
-
-      Object.keys(state.skills).map((key, i) => {
-        if (key === action.skill) {
-          countSkill = valueSkill ? countSkill + 1 : countSkill - 1
-        }
-        else if (state.skills[key] === true) {
-          countSkill++          
-        }
-        return key
-      })
 
       return {
         ...state,
-        countSkill,
+        countSkill: valueSkill ? state.countSkill + 1 : state.countSkill - 1,
         skills: {
           ...state.skills,
           [action.skill]: valueSkill
         }
       }
 
-    case SKILL_CHECK:
-
-    let check = [action.check]
+    case CHANGE_RACE:
 
       return {
         ...state,
-        check
+        race: action.race
+      }
+
+    case CHECK_SKILL:
+  
+      return {
+        ...state,
+        countSkill: defaultState.countSkill,
+        skills: {
+          ...defaultState.skills,
+          [action.skill]: true
+        }
       }
 
     default:

@@ -1,52 +1,38 @@
 import React, { Component } from 'react'
 import { INITIAL_SKILL_POINTS } from '../../../settings'
 
-import '../style.css'
-
 class Skills extends Component {
 
   // Handle the props of a skill depending on checkbox
   handleCheckbox(e, skill) {
-    this.props.skillChange(skill)
+    this.props.changeSkill(skill)
   }
 
   /* Display a checkbox to pick or unpick a skill
   When checked the skill return true, uncheck return false */
   renderSkill(skill) {
-    let disabled = this.props.countSkill >= INITIAL_SKILL_POINTS && this.props.skills[skill] === false   
-    let checked = null
-
-    // let skillsChecking = Object.keys(this.props.skills)
-    
-    // skillsChecking.map((skill) => {
-    //   if (this.props.check === ['human'] && this.props.skills.blade === false) {
-    //     return (
-    //       this.props.countSkill + 1,
-    //       this.props.skills.blade === true,
-    //       checked = ''
-    //     )
-    //   }
-    //   else if (this.props.check === ['default'] && this.props.skills.blade === true) {
-    //     return (
-    //       this.props.countSkill - 1,
-    //       this.props.skills.blade === false,      
-    //       checked = null 
-    //     )
-    //   }
-    //   return null
-    // })
+    let disabled = this.props.countSkill >= INITIAL_SKILL_POINTS && this.props.skills[skill] === false
+    let readonly = 
+      (this.props.race === 'human' && skill === 'blade')
+      || (this.props.race === 'sylvan' && skill === 'accuracy')
+      || (this.props.race === 'greenskin' && skill === 'hammer')
+      || (this.props.race === 'gnome' && skill === 'alchemy')
+      || (this.props.race === 'reptilian' && skill === 'hands')
+      || (this.props.race === 'magister' && skill === 'spell') 
 
     return (
-      <div key={skill}>
+      <div className="left" key={skill}>
         <input 
+          className="checkbox-custom"
           type="checkbox" 
           disabled={disabled}
-          checked={checked}
+          readOnly={readonly}          
+          checked={this.props.skills[skill]}
           id={skill}      
-          onChange={(e) => {this.handleCheckbox(e, skill)}} 
           value={skill}
+          onChange={(e) => {this.handleCheckbox(e, skill)}} 
         />
-        <label htmlFor={skill} className="object">{skill}</label>    
+        <label htmlFor={skill} className="object" readOnly={readonly} >{skill}</label>    
       </div>  
     )
   }
@@ -56,13 +42,10 @@ class Skills extends Component {
   render() {
     let skillsList = Object.keys(this.props.skills)
 
-    // console.log(this.props.skills.blade)
-    // console.log(this.props.check)
-    // console.log(this.props.countSkill)
-
     return (
-      <div>
+      <div className="center">
         <p>Select {INITIAL_SKILL_POINTS} skills for your first level</p>
+        <p><strong>Note:</strong> A free skill is automatically selected depending on your race</p>
         <form name="checkSkills" id="checkSkills">
             <div className="skill-list">
             <h3>Fight</h3>

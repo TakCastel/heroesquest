@@ -1,9 +1,11 @@
 import { connect } from 'react-redux'
 import Character from '../components/Character'
 import { 
-  characteristicChange, 
-  skillChange,
-  skillCheck
+  changeName,
+  changeCharacteristic, 
+  changeSkill,
+  changeRace,
+  checkSkill
 } from '../actions'
 
 const mapStateToProps = (state, ownProps) => ({
@@ -11,14 +13,20 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    characteristicChange: (characteristic, value) => {
-      dispatch(characteristicChange(characteristic, value))
+    changeName: (name) => {
+      dispatch(changeName(name))
     },
-    skillChange: (skill) => {
-      dispatch(skillChange(skill))
+    changeCharacteristic: (characteristic, value) => {
+      dispatch(changeCharacteristic(characteristic, value))
     },
-    skillCheck: (check) => {
-      dispatch(skillCheck(check))
+    changeSkill: (skill) => {
+      dispatch(changeSkill(skill))
+    },
+    changeRace: (race) => {
+      dispatch(changeRace(race))
+    },
+    checkSkill: (skill) => {
+      dispatch(checkSkill(skill))
     }
 })
 

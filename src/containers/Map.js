@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
-import Quest from '../components/Quest'
+import Map from '../components/Map'
 
 const mapStateToProps = (state, ownProps) => ({
-  quest: state.quest
+  map: state.map
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -11,9 +11,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     // }
 })
 
-const QuestContainer = connect(
+const MapContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Quest)
+)(Map)
 
-export default QuestContainer
+export default MapContainer

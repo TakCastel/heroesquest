@@ -25,7 +25,7 @@ class Points extends Component {
 
   render() {
     return (
-      <div className="Points">
+      <div>
         <p>You have <strong>{this.state.points}</strong> points to spend on your new character.</p>
       </div>
     )
