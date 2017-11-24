@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Attributes extends Component {
+class Abilities extends Component {
 
   render() {
     return (
@@ -18,4 +18,4 @@ class Attributes extends Component {
   }
 }
 
-export default Attributes;
+export default Abilities;

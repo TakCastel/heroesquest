@@ -9,7 +9,7 @@ import {
 } from '../actions'
 
 const mapStateToProps = (state, ownProps) => ({
-  character: state.character
+  ...state.character
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

@@ -1,53 +1,96 @@
 import React, { Component } from 'react'
+import { Steps, Button, message } from 'antd';
 
-import Points from '../Character/Points'
-import Name from '../Character/Name'
-import Race from '../Character/Race'
+import Profile from '../Character/Profile'
 import Characteristics from '../Character/Characteristics'
-import Attributes from '../Character/Attributes'
 import Skills from '../Character/Skills'
-import Create from '../Character/Create'
+
+const Step = Steps.Step;
 
 class Character extends Component {
-  render() {
+
+  state = { current: 0 }
+
+  renderFormProfile() {
     return (
-      <div className="container">
-
-        <h1>Character sheet</h1>
-
-        <p>Welcome to Heroes Quest, please create a character</p>
-
-        <h2>Profile</h2>
-        <form>
-          <Name 
-            {...this.props.character} 
-            changeName={this.props.changeName} /><br/>
-          <Race 
-            {...this.props.character} 
-            changeRace={this.props.changeRace}
-            checkSkill={this.props.checkSkill} />      
-        </form>
+      <Profile {...this.props}/> 
+    )
+  }
   
-        <h2>Characteristics</h2>
-        <Points {...this.props.character} />
-        <Characteristics
-          {...this.props.character} 
-          changeCharacteristic={this.props.changeCharacteristic} />
+  renderFormCharacteristics() {
+    return (
+      <div>
+        <Characteristics {...this.props}/>
+      </div>
+    )
+  }
 
-        <h2>Attributes</h2>
-        <Attributes 
-          {...this.props.character} />
+  renderFormSkills() {
+    return (
+      <Skills {...this.props}/>
+    )
+  }
 
-        <h2>Skills</h2>        
-        <Skills 
-          {...this.props.character} 
-          changeSkill={this.props.changeSkill} />
+  next() {
+    const current = this.state.current + 1;
+    this.setState({ current });
+  }
+  prev() {
+    const current = this.state.current - 1;
+    this.setState({ current });
+  }
+  render() {
 
-        <Create {...this.props.character}
-          createCharacter={this.props.createCharacter} />
+    let disabled = this.props.name === '' || this.props.countSkill < 3 || this.props.race === 'default' || this.props.totalSpentInCharacteristics < 11
+    const { current } = this.state 
+    
+    console.log(this.props.name, this.props.countSkill, this.props.race, this.props.totalSpentInCharacteristics)
+    
+    const steps = [{
+      title: 'Profile',
+      content: this.renderFormProfile(),
+    }, {
+      title: 'Characteristics',
+      content: this.renderFormCharacteristics(),
+    }, {
+      title: 'Skills',
+      content: this.renderFormSkills(),
+    }];
+
+    console.log(disabled)
+  
+    return (
+      <div>
+        <h1>Character creation</h1>
+        <p>Welcome to Heroes Quest, this is the character creation</p>
+        <div className="spacer"></div>      
+        <Steps current={current}>
+          {steps.map(item => <Step key={item.title} title={item.title} />)}
+        </Steps>
+        <div className="steps-content">{steps[this.state.current].content}</div>
+        <div className="spacer"></div>        
+        <div className="steps-action">
+        {
+          this.state.current < steps.length - 1
+          &&
+          <Button type="primary" onClick={() => this.next()}>Next</Button>
+        }
+        {
+          this.state.current === steps.length - 1
+          &&
+          <Button type="primary" onClick={() => message.success('Character created!')}  disabled={disabled}>Done </Button>
+        }
+        {
+          this.state.current > 0
+          &&
+          <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
+            Previous
+          </Button>
+        }
+        </div>
       </div>
     );
   }
 }
 
-export default Character;
+export default Character

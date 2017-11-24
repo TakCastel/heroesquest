@@ -1,20 +1,24 @@
+// React
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-
-import { saveState } from './localStorage'
-
-import configureStore from './store/configureStore';
 import registerServiceWorker from './registerServiceWorker';
-import App from './App';
 
+// Redux
+import { Provider } from 'react-redux';
+import configureStore from './store/configureStore';
+
+// Application
+import App from './App';
 import './index.css';
+
+// import { saveState } from './localStorage'
+
 
 const store = configureStore()
 
-store.subscribe(() => {
-	saveState(store.getState())
-})
+// store.subscribe(() => {
+// 	saveState(store.getState())
+// })
 
 ReactDOM.render(
 	<Provider 

@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Row, Col } from 'antd';
+
 import { INITIAL_SKILL_POINTS } from '../../../settings'
 
 class Skills extends Component {
@@ -21,9 +23,8 @@ class Skills extends Component {
       || (this.props.race === 'magister' && skill === 'spell') 
 
     return (
-      <div className="left" key={skill}>
+      <div className="white-space-nowrap" key={skill}>
         <input 
-          className="checkbox-custom"
           type="checkbox" 
           disabled={disabled}
           readOnly={readonly}          
@@ -32,7 +33,7 @@ class Skills extends Component {
           value={skill}
           onChange={(e) => {this.handleCheckbox(e, skill)}} 
         />
-        <label htmlFor={skill} className="object" readOnly={readonly} >{skill}</label>    
+        <label className="first-letter-uppercase" htmlFor={skill} readOnly={readonly}> {skill}</label>    
       </div>  
     )
   }
@@ -44,37 +45,45 @@ class Skills extends Component {
 
     return (
       <div className="center">
-        <p>Select {INITIAL_SKILL_POINTS} skills for your first level</p>
+        <div className="spacer"></div>      
+        <p>Select <strong>{INITIAL_SKILL_POINTS} skills</strong> for your first level</p>
+        <div className="spacer"></div>        
         <p><strong>Note:</strong> A free skill is automatically selected depending on your race</p>
-        <form name="checkSkills" id="checkSkills">
-            <div className="skill-list">
-            <h3>Fight</h3>
-              {skillsList.map((skill, i) => {                
-                if (i >= 0 && i <= 5) {
-                  return this.renderSkill(skill)
-                }
-                return null
-              })}
-            </div>
-            <div className="skill-list">  
-              <h3>Stealth</h3>        
-              {skillsList.map((skill, i) => {
-                if (i > 5 && i <= 11) {
-                  return this.renderSkill(skill)
-                }
-                return null                
-              })}
-            </div>
-            <div className="skill-list">
-              <h3>Magic</h3>
-              {skillsList.map((skill, i) => {
-                if (i > 11 && i <= 18) {
-                  return this.renderSkill(skill)
-                }
-                return null                
-              })}
-            </div>
-          </form>
+        <Row type="flex" justify="space-around">        
+          <Col lg={3}>
+            <div className="spacer"></div>                
+            <h3>Fight</h3> 
+            <div className="spacer"></div>            
+            {skillsList.map((skill, i) => {                
+              if (i >= 0 && i <= 5) {
+                return this.renderSkill(skill)
+              }
+              return null
+            })}
+          </Col>
+          <Col lg={3}>
+            <div className="spacer"></div>                
+            <h3>Stealth</h3>
+            <div className="spacer"></div>            
+            {skillsList.map((skill, i) => {
+              if (i > 5 && i <= 11) {
+                return this.renderSkill(skill)
+              }
+              return null                
+            })}
+          </Col>
+          <Col lg={3}>
+            <div className="spacer"></div>      
+            <h3>Magic</h3>
+            <div className="spacer"></div>            
+            {skillsList.map((skill, i) => {
+              if (i > 11 && i <= 18) {
+                return this.renderSkill(skill)
+              }
+              return null                
+            })}
+          </Col>
+        </Row>
       </div>
     )
   }
